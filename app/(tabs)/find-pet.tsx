@@ -1,6 +1,6 @@
 import { StyleSheet, Text, View } from "react-native";
 
-export default function TabPage() {
+export default function FindPetPage() {
   return (
     <View style={styles.container}>
       <Text>Home screen</Text>
