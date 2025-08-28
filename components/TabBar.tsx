@@ -15,6 +15,12 @@ export default function TabBar({ state, descriptors, navigation }: BottomTabBarP
   const { colors } = useTheme();
   const { buildHref } = useLinkBuilder();
 
+  const icon: Record<string, any> = {
+    index: (props: any) => <Feather name="home" size={24} color={'#222'} {...props} />,
+    'find-pet': (props: any) => <Feather name="airplay" size={24} color={'#222'} {...props} />,
+    'find-pet2': (props: any) => <Feather name="activity" size={24} color={'#222'} {...props} />
+  }
+
   return (
     <View style={styles.tabbar}>
       {state.routes.map((route, index) => {
@@ -60,8 +66,11 @@ export default function TabBar({ state, descriptors, navigation }: BottomTabBarP
             onLongPress={onLongPress}
             style={styles.tabbarItem}
           >
-            <Feather name="home" size={24} color={'#222'} />
-            <Text style={{ color: colors.text }}>
+            {icon[route.name]({
+              color: isFocused ? '#673ab7' : '#222'
+            })}
+
+            <Text style={{ color: isFocused ? '#673ab7' : '#222' }}>
               {label}
             </Text>
           </PlatformPressable>
