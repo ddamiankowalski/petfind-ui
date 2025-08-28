@@ -2,7 +2,6 @@ import React from "react";
 import { StyleSheet, View } from "react-native";
 import {
   useLinkBuilder,
-  useTheme,
 } from "@react-navigation/native";
 import {
   Text,
@@ -12,13 +11,12 @@ import { BottomTabBarProps } from "@react-navigation/bottom-tabs";
 import { Feather } from '@react-native-vector-icons/feather';
 
 export default function TabBar({ state, descriptors, navigation }: BottomTabBarProps) {
-  const { colors } = useTheme();
   const { buildHref } = useLinkBuilder();
 
   const icon: Record<string, any> = {
     index: (props: any) => <Feather name="home" size={24} color={'#222'} {...props} />,
     'find-pet': (props: any) => <Feather name="airplay" size={24} color={'#222'} {...props} />,
-    'find-pet2': (props: any) => <Feather name="activity" size={24} color={'#222'} {...props} />
+    'find-pet2': (props: any) => <Feather name="search" size={24} color={'#222'} {...props} />
   }
 
   return (
@@ -94,7 +92,8 @@ const styles = StyleSheet.create({
     shadowColor: '#000',
     shadowOffset: { width: 0, height: 10 },
     shadowRadius: 10,
-    shadowOpacity: 0.1
+    shadowOpacity: 0.1,
+    elevation: 10
   },
   tabbarItem: {
     flex: 1,
