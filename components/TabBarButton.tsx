@@ -1,23 +1,54 @@
 import { fontFamily } from "@/constants/fonts";
 import { icon } from "@/constants/icon";
 import { PlatformPressable } from "@react-navigation/elements";
-import { StyleSheet, Text } from "react-native";
+import { useEffect } from "react";
+import { StyleSheet } from "react-native";
+
+import Animated, { interpolate, useAnimatedStyle, useSharedValue, withSpring } from "react-native-reanimated";
 
 export default function TabBarButton({
   onPress,
   onLongPress,
-  isFocused,
   routeName,
   color,
   label,
+  isFocused,
 }: {
-onPress: () => void;
-onLongPress: () => void;
+  onPress: () => void;
+  onLongPress: () => void;
   isFocused: boolean;
   routeName: string;
   color: string;
   label: React.ReactNode;
-  }) {
+}) {
+  const scale = useSharedValue(0);
+
+  useEffect(() => {
+    scale.value = withSpring(typeof isFocused === "boolean" ? (isFocused ? 1 : 0) : isFocused, { duration: 350 });
+  }, [scale, isFocused]);
+
+  const animatedIconStyle = useAnimatedStyle(() => {
+    const scaleValue = interpolate(scale.value, [0, 1], [1, 1.2]);
+    const top = interpolate(scale.value, [0, 1], [0, 9])
+
+    return {
+      transform: [
+        {
+          scale: scaleValue,
+        },
+      ],
+      top
+    };
+  });
+
+  const animatedTextStyle = useAnimatedStyle(() => {
+    const opacity = interpolate(scale.value, [0, 1], [1, 0]);
+
+    return {
+      opacity,
+    };
+  });
+
   return (
     <PlatformPressable
       android_ripple={{ color: "transparent" }}
@@ -25,11 +56,13 @@ onLongPress: () => void;
       onLongPress={onLongPress}
       style={styles.tabbarItem}
     >
-      {icon[routeName]({
-        color: isFocused ? "#673ab7" : "#222",
-      })}
+      <Animated.View style={{ alignItems: "center", justifyContent: "center" }}>
+        <Animated.View style={animatedIconStyle}>{icon[routeName]({ color })}</Animated.View>
 
-      <Text style={{ color: isFocused ? "#673ab7" : "#222", fontFamily: fontFamily.bold }}>{label}</Text>
+        <Animated.Text style={[{ color, fontFamily: fontFamily.bold, fontSize: 12, marginTop: 5 }, animatedTextStyle]}>
+          {label}
+        </Animated.Text>
+      </Animated.View>
     </PlatformPressable>
   );
 }
@@ -37,9 +70,8 @@ onLongPress: () => void;
 const styles = StyleSheet.create({
   tabbarItem: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
     gap: 5,
-    fontFamily: 'SpaceMono'
-  }
+  },
 });
