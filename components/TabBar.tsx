@@ -14,9 +14,9 @@ export default function TabBar({ state, descriptors, navigation }: BottomTabBarP
   const { buildHref } = useLinkBuilder();
 
   const icon: Record<string, any> = {
-    index: (props: any) => <Feather name="home" size={24} color={'#222'} {...props} />,
-    'find-pet': (props: any) => <Feather name="airplay" size={24} color={'#222'} {...props} />,
-    'find-pet2': (props: any) => <Feather name="search" size={24} color={'#222'} {...props} />
+    index: (props: any) => <Feather name="list" size={18} color={'#222'} {...props} />,
+    'find-pet': (props: any) => <Feather name="search" size={18} color={'#222'} {...props} />,
+    about: (props: any) => <Feather name="info" size={18} color={'#222'} {...props} />
   }
 
   return (

@@ -6,7 +6,7 @@ export default function TabsLayout() {
     <Tabs tabBar={props => <TabBar {...props} />}>
       <Tabs.Screen name="index" options={{ title: 'All pets', headerShown: false, animation: 'shift' }}></Tabs.Screen>
       <Tabs.Screen name="find-pet" options={{ title: 'Find pet', headerShown: false, animation: 'shift' }}></Tabs.Screen>
-      <Tabs.Screen name="find-pet2" options={{ title: 'Find pet2', headerShown: false, animation: 'shift' }}></Tabs.Screen>
+      <Tabs.Screen name="about" options={{ title: 'About', headerShown: false, animation: 'shift' }}></Tabs.Screen>
     </Tabs>
   )
 }
