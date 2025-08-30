@@ -8,9 +8,9 @@ export default function PetMapCarousel() {
         {[...Array(10).keys()].map((i) => (
           <PetMapCarouselItem
             key={i}
-            name="Persian Cat"
+            name="Sausage Dog"
             description="Calm and affectionate, with a luxurious coat."
-            imageUrl="https://placekitten.com/400/300"
+            imageUrl="https://animalcarecentersmyrna.com/wp-content/uploads/2021/08/Untitled-design-2021-08-19T162152.857.png"
           />
         ))}
       </ScrollView>
