@@ -44,7 +44,7 @@ export default function TabBar({ state, descriptors, navigation }: BottomTabBarP
             onLongPress={onLongPress}
             isFocused={isFocused}
             routeName={route.name}
-            color={isFocused ? '#673ab7' : '#222'}
+            color={isFocused ? '#673ab7' : '#666'}
             label={label}
           />
         );
