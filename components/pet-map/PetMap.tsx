@@ -8,6 +8,10 @@ export default function PetMap() {
   const [region, setRegion] = useState<any>(null);
   const mapRef = useRef<MapView | null>(null);
 
+  const coordinates = [
+    { latitude: 16.930616, longitude: 52.398593, latitudeDelta: 0.1, longitudeDelta: 0.1, name: 'Some name' }
+  ]
+
   useEffect(() => {
     (async () => {
       let { status } = await Location.requestForegroundPermissionsAsync();
@@ -31,7 +35,7 @@ export default function PetMap() {
   return (
     <View style={styles.container}>
       <MapView ref={mapRef} provider={PROVIDER_GOOGLE} style={styles.map} region={region} showsUserLocation={true}>
-        <Marker coordinate={{ longitude: 52.398593, latitude: 16.930616 }} title={"??"} description={"??"} />
+        {coordinates.map((coordinate, i) => <Marker key={i} coordinate={coordinate} />)}
       </MapView>
 
       <PetMapCarousel mapRef={mapRef} />
