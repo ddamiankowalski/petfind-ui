@@ -1,5 +1,4 @@
 import { fontFamily } from "@/constants/fonts";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { PropsWithChildren } from "react";
 import { StyleSheet, Text, View } from "react-native";
 import Hamburger from "./Hamburger";

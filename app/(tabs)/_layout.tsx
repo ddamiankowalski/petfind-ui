@@ -1,9 +1,8 @@
 import TabBar from "@/components/TabBar";
-import { fontFamily } from "@/constants/fonts";
 import { Tabs, usePathname } from "expo-router";
-import { Text, View } from "react-native";
+import { View } from "react-native";
 import { useSafeAreaInsets } from "react-native-safe-area-context";
-import Header from '../../components/header/Header';
+import Header from "../../components/header/Header";
 
 export default function TabsLayout() {
   const pathname = usePathname();
@@ -17,19 +16,19 @@ export default function TabsLayout() {
 
   const title = routeTitleMap[pathname] || "";
   return (
-    <View style={{ flex: 1, paddingTop: insets.top }}>
+    <View style={{ flex: 1, paddingTop: insets.top, paddingBottom: insets.bottom }}>
       <Header title={title} />
 
-    <Tabs
-      screenOptions={{
-        headerShown: false,
-      }}
-      tabBar={props => <TabBar {...props} />}
-    >
-      <Tabs.Screen name="index" options={{ title: 'All pets', animation: 'fade' }} />
-      <Tabs.Screen name="find-pet" options={{ title: 'Find pet', animation: 'fade' }} />
-      <Tabs.Screen name="about" options={{ title: 'About', animation: 'fade' }} />
+      <Tabs
+        screenOptions={{
+          headerShown: false,
+        }}
+        tabBar={(props) => <TabBar {...props} />}
+      >
+        <Tabs.Screen name="index" options={{ title: "All pets", animation: "fade" }} />
+        <Tabs.Screen name="find-pet" options={{ title: "Find pet", animation: "fade" }} />
+        <Tabs.Screen name="about" options={{ title: "About", animation: "fade" }} />
       </Tabs>
-      </View>
-  )
+    </View>
+  );
 }
