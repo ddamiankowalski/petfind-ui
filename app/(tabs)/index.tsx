@@ -1,10 +1,13 @@
 import { StyleSheet, View } from "react-native";
-import { GoogleMaps } from 'expo-maps';
+import MapView, { PROVIDER_GOOGLE } from 'react-native-maps';
 
 export default function TabPage() {
   return (
     <View style={styles.container}>
-      <GoogleMaps.View></GoogleMaps.View>
+      <MapView
+        provider={PROVIDER_GOOGLE}
+        style={styles.map}
+      />
     </View>
   )
 }
@@ -23,6 +26,10 @@ const styles = StyleSheet.create({
     shadowRadius: 10,
     shadowOpacity: 0.1,
     marginBottom: 20,
-    overflow: 'visible'
+    overflow: 'hidden'
+  },
+  map: {
+    width: '100%',
+    height: '100%',
   }
 })
