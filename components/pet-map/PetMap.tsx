@@ -1,11 +1,12 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { StyleSheet, View } from "react-native";
-import MapView, { PROVIDER_GOOGLE } from 'react-native-maps';
+import MapView, { Marker, PROVIDER_GOOGLE } from "react-native-maps";
 import * as Location from "expo-location";
 import PetMapCarousel from "./PetMapCarousel";
 
 export default function PetMap() {
   const [region, setRegion] = useState<any>(null);
+  const mapRef = useRef<MapView | null>(null);
 
   useEffect(() => {
     (async () => {
@@ -26,27 +27,24 @@ export default function PetMap() {
       });
     })();
   }, []);
-  
+
   return (
     <View style={styles.container}>
-      <MapView
-        provider={PROVIDER_GOOGLE}
-        style={styles.map}
-        region={region}
-        showsUserLocation={true}
-      />
+      <MapView ref={mapRef} provider={PROVIDER_GOOGLE} style={styles.map} region={region} showsUserLocation={true}>
+        <Marker coordinate={{ longitude: 52.398593, latitude: 16.930616 }} title={"??"} description={"??"} />
+      </MapView>
 
-      <PetMapCarousel />
+      <PetMapCarousel mapRef={mapRef} />
     </View>
-  )
+  );
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#fff',
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "#fff",
     marginHorizontal: 24,
     borderRadius: 25,
     elevation: 5,
@@ -55,11 +53,11 @@ const styles = StyleSheet.create({
     shadowRadius: 5,
     shadowOpacity: 0.1,
     marginBottom: 20,
-    overflow: 'visible'
+    overflow: "visible",
   },
   map: {
-    width: '100%',
-    height: '100%',
+    width: "100%",
+    height: "100%",
     borderRadius: 25,
-  }
-})
+  },
+});

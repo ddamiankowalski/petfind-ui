@@ -5,13 +5,23 @@ type PetMapCarouselItemProps = {
   name: string;
   description: string;
   imageUrl: string;
+  longitute: number,
+  latitude: number,
+  onMapShow: (longitude: number, latitude: number) => void,
 };
 
 export default function PetMapCarouselItem({
   name,
   description,
   imageUrl,
+  longitute,
+  latitude,
+  onMapShow
 }: PropsWithChildren<PetMapCarouselItemProps>) {
+  const onShowClick = () => {
+    onMapShow(longitute, latitude);
+  }
+
   return (
     <View style={styles.card}>
       <Image source={{ uri: imageUrl }} style={styles.image} />
@@ -23,9 +33,10 @@ export default function PetMapCarouselItem({
         </Text>
 
         <View style={styles.buttonRow}>
-          <TouchableOpacity style={[styles.button, styles.secondaryButton]}>
+          <TouchableOpacity onPress={onShowClick} style={[styles.button, styles.secondaryButton]}>
             <Text numberOfLines={1} style={[styles.buttonText, { color: '#673ab7' }]}>Show on map</Text>
           </TouchableOpacity>
+          
           <TouchableOpacity style={[styles.button, styles.primaryButton]}>
             <Text numberOfLines={1} style={styles.buttonText}>Found him</Text>
           </TouchableOpacity>
