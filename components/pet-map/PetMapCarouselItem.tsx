@@ -1,3 +1,5 @@
+import { fontFamily } from "@/constants/fonts";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { PropsWithChildren } from "react";
 import { StyleSheet, View, Text, Image, TouchableOpacity } from "react-native";
 
@@ -5,9 +7,9 @@ type PetMapCarouselItemProps = {
   name: string;
   description: string;
   imageUrl: string;
-  longitute: number,
-  latitude: number,
-  onMapShow: (longitude: number, latitude: number) => void,
+  longitute: number;
+  latitude: number;
+  onMapShow: (longitude: number, latitude: number) => void;
 };
 
 export default function PetMapCarouselItem({
@@ -16,31 +18,59 @@ export default function PetMapCarouselItem({
   imageUrl,
   longitute,
   latitude,
-  onMapShow
+  onMapShow,
 }: PropsWithChildren<PetMapCarouselItemProps>) {
   const onShowClick = () => {
     onMapShow(longitute, latitude);
-  }
+  };
 
   return (
     <View style={styles.card}>
-      <Image source={{ uri: imageUrl }} style={styles.image} />
+      <View style={styles.topInfo}>
+        <Image source={{ uri: imageUrl }} style={styles.image} />
 
-      <View style={styles.info}>
-        <Text style={styles.name}>{name}</Text>
-        <Text style={styles.description} numberOfLines={2}>
-          {description}
-        </Text>
+        <View style={styles.info}>
+          <Text style={styles.name}>{name}</Text>
 
-        <View style={styles.buttonRow}>
-          <TouchableOpacity onPress={onShowClick} style={[styles.button, styles.secondaryButton]}>
-            <Text numberOfLines={1} style={[styles.buttonText, { color: '#673ab7' }]}>Show on map</Text>
-          </TouchableOpacity>
-          
-          <TouchableOpacity style={[styles.button, styles.primaryButton]}>
-            <Text numberOfLines={1} style={styles.buttonText}>Found him</Text>
-          </TouchableOpacity>
+          <View
+            style={{ display: "flex", flexDirection: "column", marginTop: 4 }}
+          >
+            <Text style={styles.description} numberOfLines={1}>
+              <Text style={{ fontFamily: fontFamily.bold }}>Lost:</Text>{" "}
+              04/05/2025
+            </Text>
+
+            <Text style={styles.description} numberOfLines={1}>
+              <Text style={{ fontFamily: fontFamily.bold }}>Last seen:</Text>{" "}
+              Poznan, Wilda
+            </Text>
+            <Text style={styles.description} numberOfLines={1}>
+              <Text style={{ fontFamily: fontFamily.bold }}>Phone:</Text> +48
+              512 241 024
+            </Text>
+          </View>
         </View>
+      </View>
+
+      <View style={styles.buttonRow}>
+        <TouchableOpacity
+          onPress={onShowClick}
+          style={[styles.button, styles.secondaryButton]}
+        >
+          <MaterialCommunityIcons name="map" color={"#666"} />
+          <Text
+            numberOfLines={1}
+            style={[styles.buttonText, styles.secondaryButtonText]}
+          >
+            Show on map
+          </Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity style={[styles.button, styles.primaryButton]}>
+          <Text numberOfLines={1} style={styles.buttonText}>
+            Found him
+          </Text>
+        </TouchableOpacity>
       </View>
     </View>
   );
@@ -48,12 +78,11 @@ export default function PetMapCarouselItem({
 
 const styles = StyleSheet.create({
   card: {
-    flexDirection: "row",
+    flexDirection: "column",
     backgroundColor: "#fff",
     borderRadius: 12,
     overflow: "hidden",
-    width: 300,
-    height: 140,
+    width: 280,
     marginRight: 12,
     elevation: 5,
     shadowColor: "#000",
@@ -61,15 +90,21 @@ const styles = StyleSheet.create({
     shadowRadius: 5,
     shadowOpacity: 0.15,
   },
+  topInfo: {
+    display: "flex",
+    flexDirection: "row",
+  },
   image: {
     width: 100,
-    height: "100%",
+    height: 100,
+    borderRadius: 10,
+    padding: 10,
   },
   info: {
     flex: 1,
     paddingVertical: 10,
-    paddingHorizontal: 12,
-    justifyContent: "space-between",
+    paddingHorizontal: 4,
+    justifyContent: "flex-start",
   },
   name: {
     fontWeight: "bold",
@@ -77,32 +112,40 @@ const styles = StyleSheet.create({
     marginBottom: 2,
   },
   description: {
-    fontSize: 14,
+    fontSize: 11,
     color: "#666",
     flexShrink: 1,
   },
   buttonRow: {
     flexDirection: "row",
     justifyContent: "space-between",
-    marginTop: 8,
+    paddingHorizontal: 10,
+    gap: 8,
+    marginBottom: 10,
   },
   button: {
     flex: 1,
     paddingVertical: 6,
-    marginHorizontal: 4,
-    borderRadius: 25,
+    borderRadius: 5,
     alignItems: "center",
   },
   primaryButton: {
     backgroundColor: "#673ab7",
   },
   secondaryButton: {
-    color: '#673ab7',
-    borderColor: '#673ab7'
+    flexDirection: "row",
+    gap: 8,
+    justifyContent: "center",
+    backgroundColor: "transparent",
+    borderColor: "#666",
+    borderWidth: 1,
+  },
+  secondaryButtonText: {
+    color: "#666",
   },
   buttonText: {
     color: "#fff",
-    fontSize: 10,
+    fontSize: 12,
     fontWeight: "600",
   },
 });

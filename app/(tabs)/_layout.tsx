@@ -27,7 +27,7 @@ export default function TabsLayout() {
       >
         <Tabs.Screen
           name="index"
-          options={{ title: "All pets", animation: "fade" }}
+          options={{ title: "Pet map", animation: "fade" }}
         />
         <Tabs.Screen
           name="find-pet"

@@ -7,7 +7,9 @@ type PetMapCarouselProps = {
   mapRef: React.RefObject<MapView | null>;
 };
 
-export default function PetMapCarousel({ mapRef }: PropsWithChildren<PetMapCarouselProps>) {
+export default function PetMapCarousel({
+  mapRef,
+}: PropsWithChildren<PetMapCarouselProps>) {
   const goToLocation = (lat: number, lng: number) => {
     if (mapRef.current) {
       mapRef.current.animateCamera(
@@ -21,7 +23,11 @@ export default function PetMapCarousel({ mapRef }: PropsWithChildren<PetMapCarou
   };
   return (
     <View style={styles.container}>
-      <ScrollView horizontal showsHorizontalScrollIndicator={false} contentContainerStyle={styles.scrollContainer}>
+      <ScrollView
+        horizontal
+        showsHorizontalScrollIndicator={false}
+        contentContainerStyle={styles.scrollContainer}
+      >
         {[...Array(10).keys()].map((i) => (
           <PetMapCarouselItem
             key={i}
@@ -41,15 +47,13 @@ export default function PetMapCarousel({ mapRef }: PropsWithChildren<PetMapCarou
 const styles = StyleSheet.create({
   container: {
     position: "absolute",
-    bottom: 0,
+    bottom: 20,
     width: "100%",
     paddingVertical: 10,
     overflow: "hidden",
     elevation: 5,
     shadowColor: "#000",
     shadowOffset: { width: 0, height: 5 },
-    borderBottomLeftRadius: 25,
-    borderBottomRightRadius: 25,
     shadowOpacity: 0.1,
   },
   scrollContainer: {
