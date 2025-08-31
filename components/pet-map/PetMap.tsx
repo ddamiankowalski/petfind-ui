@@ -9,7 +9,7 @@ export default function PetMap() {
   const mapRef = useRef<MapView | null>(null);
 
   const coordinates = [
-    { latitude: 16.930616, longitude: 52.398593, latitudeDelta: 0.1, longitudeDelta: 0.1, name: 'Some name' }
+    { latitude: 52.398593, longitude: 16.930616, latitudeDelta: 0.1, longitudeDelta: 0.1, name: 'Some name' }
   ]
 
   useEffect(() => {
@@ -34,7 +34,7 @@ export default function PetMap() {
 
   return (
     <View style={styles.container}>
-      <MapView ref={mapRef} provider={PROVIDER_GOOGLE} style={styles.map} region={region} showsUserLocation={true}>
+      <MapView ref={mapRef} provider={PROVIDER_GOOGLE} style={styles.map} region={region} showsUserLocation={true} >
         {coordinates.map((coordinate, i) => <Marker key={i} coordinate={coordinate} />)}
       </MapView>
 
