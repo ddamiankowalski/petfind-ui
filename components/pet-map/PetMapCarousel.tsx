@@ -47,7 +47,7 @@ export default function PetMapCarousel({
 const styles = StyleSheet.create({
   container: {
     position: "absolute",
-    bottom: 20,
+    bottom: 40,
     width: "100%",
     paddingVertical: 10,
     overflow: "hidden",

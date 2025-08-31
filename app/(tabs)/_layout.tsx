@@ -1,12 +1,10 @@
 import TabBar from "@/components/TabBar";
 import { Tabs, usePathname } from "expo-router";
 import { View } from "react-native";
-import { useSafeAreaInsets } from "react-native-safe-area-context";
 import Header from "../../components/header/Header";
 
 export default function TabsLayout() {
   const pathname = usePathname();
-  const insets = useSafeAreaInsets();
 
   const routeTitleMap: Record<string, string> = {
     "/": "All pets",
@@ -16,7 +14,7 @@ export default function TabsLayout() {
 
   const title = routeTitleMap[pathname] || "";
   return (
-    <View style={{ flex: 1, paddingTop: insets.top }}>
+    <View style={{ flex: 1 }}>
       <Header title={title} />
 
       <Tabs

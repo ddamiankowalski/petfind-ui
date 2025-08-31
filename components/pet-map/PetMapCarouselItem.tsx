@@ -41,7 +41,9 @@ export default function PetMapCarouselItem({
             </Text>
 
             <Text style={styles.description} numberOfLines={1}>
-              <Text style={{ fontFamily: fontFamily.bold }}>Last seen:</Text>{" "}
+              <Text style={{ fontFamily: fontFamily.bold }}>
+                Last location:
+              </Text>{" "}
               Poznan, Wilda
             </Text>
             <Text style={styles.description} numberOfLines={1}>
