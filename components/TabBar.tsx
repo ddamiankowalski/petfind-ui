@@ -69,6 +69,5 @@ const styles = StyleSheet.create({
     alignItems: "center",
     backgroundColor: "#fff",
     paddingVertical: 15,
-    borderRadius: 35,
   },
 });

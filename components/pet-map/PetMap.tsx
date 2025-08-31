@@ -9,8 +9,14 @@ export default function PetMap() {
   const mapRef = useRef<MapView | null>(null);
 
   const coordinates = [
-    { latitude: 52.398593, longitude: 16.930616, latitudeDelta: 0.1, longitudeDelta: 0.1, name: 'Some name' }
-  ]
+    {
+      latitude: 52.398593,
+      longitude: 16.930616,
+      latitudeDelta: 0.1,
+      longitudeDelta: 0.1,
+      name: "Some name",
+    },
+  ];
 
   useEffect(() => {
     (async () => {
@@ -34,8 +40,16 @@ export default function PetMap() {
 
   return (
     <View style={styles.container}>
-      <MapView ref={mapRef} provider={PROVIDER_GOOGLE} style={styles.map} region={region} showsUserLocation={true} >
-        {coordinates.map((coordinate, i) => <Marker key={i} coordinate={coordinate} />)}
+      <MapView
+        ref={mapRef}
+        provider={PROVIDER_GOOGLE}
+        style={styles.map}
+        region={region}
+        showsUserLocation={true}
+      >
+        {coordinates.map((coordinate, i) => (
+          <Marker key={i} coordinate={coordinate} />
+        ))}
       </MapView>
 
       <PetMapCarousel mapRef={mapRef} />
@@ -49,19 +63,15 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: "#fff",
-    marginHorizontal: 24,
-    borderRadius: 25,
     elevation: 5,
     shadowColor: "#000",
     shadowOffset: { width: 0, height: 5 },
     shadowRadius: 5,
     shadowOpacity: 0.1,
-    marginBottom: 20,
     overflow: "visible",
   },
   map: {
     width: "100%",
     height: "100%",
-    borderRadius: 25,
   },
 });

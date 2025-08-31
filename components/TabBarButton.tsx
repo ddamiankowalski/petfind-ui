@@ -4,7 +4,12 @@ import { PlatformPressable } from "@react-navigation/elements";
 import { useEffect } from "react";
 import { StyleSheet } from "react-native";
 
-import Animated, { interpolate, useAnimatedStyle, useSharedValue, withSpring } from "react-native-reanimated";
+import Animated, {
+  interpolate,
+  useAnimatedStyle,
+  useSharedValue,
+  withSpring,
+} from "react-native-reanimated";
 
 export default function TabBarButton({
   onPress,
@@ -24,12 +29,15 @@ export default function TabBarButton({
   const scale = useSharedValue(0);
 
   useEffect(() => {
-    scale.value = withSpring(typeof isFocused === "boolean" ? (isFocused ? 1 : 0) : isFocused, { duration: 350 });
+    scale.value = withSpring(
+      typeof isFocused === "boolean" ? (isFocused ? 0 : 1) : isFocused,
+      { duration: 350 }
+    );
   }, [scale, isFocused]);
 
   const animatedIconStyle = useAnimatedStyle(() => {
-    const scaleValue = interpolate(scale.value, [0, 1], [1, 1.2]);
-    const top = interpolate(scale.value, [0, 1], [0, 9])
+    const scaleValue = interpolate(scale.value, [0, 1], [1, 1.4]);
+    const top = interpolate(scale.value, [0, 1], [0, 9]);
 
     return {
       transform: [
@@ -37,7 +45,7 @@ export default function TabBarButton({
           scale: scaleValue,
         },
       ],
-      top
+      top,
     };
   });
 
@@ -57,9 +65,16 @@ export default function TabBarButton({
       style={styles.tabbarItem}
     >
       <Animated.View style={{ alignItems: "center", justifyContent: "center" }}>
-        <Animated.View style={animatedIconStyle}>{icon[routeName]({ color })}</Animated.View>
+        <Animated.View style={animatedIconStyle}>
+          {icon[routeName]({ color })}
+        </Animated.View>
 
-        <Animated.Text style={[{ color, fontFamily: fontFamily.bold, fontSize: 12, marginTop: 5 }, animatedTextStyle]}>
+        <Animated.Text
+          style={[
+            { color, fontFamily: fontFamily.bold, fontSize: 12, marginTop: 5 },
+            animatedTextStyle,
+          ]}
+        >
           {label}
         </Animated.Text>
       </Animated.View>
