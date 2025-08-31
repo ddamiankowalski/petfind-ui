@@ -2,16 +2,23 @@ import React from "react";
 import { StyleSheet, View } from "react-native";
 import { BottomTabBarProps } from "@react-navigation/bottom-tabs";
 import TabBarButton from "./TabBarButton";
+import { useSafeAreaInsets } from "react-native-safe-area-context";
 
-export default function TabBar({ state, descriptors, navigation }: BottomTabBarProps) {
+export default function TabBar({
+  state,
+  descriptors,
+  navigation,
+}: BottomTabBarProps) {
+  const insets = useSafeAreaInsets();
+
   return (
-    <View style={styles.tabbar}>
+    <View style={[styles.tabbar, { paddingBottom: insets.bottom }]}>
       {state.routes.map((route, index) => {
         const { options } = descriptors[route.key];
 
         const label =
           options.tabBarLabel !== undefined
-            ? options.tabBarLabel as React.ReactNode
+            ? (options.tabBarLabel as React.ReactNode)
             : options.title !== undefined
             ? options.title
             : route.name;
@@ -44,7 +51,7 @@ export default function TabBar({ state, descriptors, navigation }: BottomTabBarP
             onLongPress={onLongPress}
             isFocused={isFocused}
             routeName={route.name}
-            color={isFocused ? '#673ab7' : '#666'}
+            color={isFocused ? "#673ab7" : "#666"}
             label={label}
           />
         );
@@ -55,19 +62,13 @@ export default function TabBar({ state, descriptors, navigation }: BottomTabBarP
 
 const styles = StyleSheet.create({
   tabbar: {
-    position: 'relative',
+    position: "relative",
     bottom: 0,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    backgroundColor: '#fff',
-    marginHorizontal: 80,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+    backgroundColor: "#fff",
     paddingVertical: 15,
     borderRadius: 35,
-    shadowColor: '#000',
-    shadowOffset: { width: 0, height: 10 },
-    shadowRadius: 10,
-    shadowOpacity: 0.1,
-    elevation: 10
   },
-})
+});

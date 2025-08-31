@@ -16,7 +16,7 @@ export default function TabsLayout() {
 
   const title = routeTitleMap[pathname] || "";
   return (
-    <View style={{ flex: 1, paddingTop: insets.top, paddingBottom: insets.bottom }}>
+    <View style={{ flex: 1, paddingTop: insets.top }}>
       <Header title={title} />
 
       <Tabs
@@ -25,9 +25,18 @@ export default function TabsLayout() {
         }}
         tabBar={(props) => <TabBar {...props} />}
       >
-        <Tabs.Screen name="index" options={{ title: "All pets", animation: "fade" }} />
-        <Tabs.Screen name="find-pet" options={{ title: "Find pet", animation: "fade" }} />
-        <Tabs.Screen name="about" options={{ title: "About", animation: "fade" }} />
+        <Tabs.Screen
+          name="index"
+          options={{ title: "All pets", animation: "fade" }}
+        />
+        <Tabs.Screen
+          name="find-pet"
+          options={{ title: "Find pet", animation: "fade" }}
+        />
+        <Tabs.Screen
+          name="about"
+          options={{ title: "About", animation: "fade" }}
+        />
       </Tabs>
     </View>
   );
